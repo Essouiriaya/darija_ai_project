@@ -39,12 +39,26 @@ def login():
 
     if not user or not user.check_password(password):
         return render_template("login.html", error="Invalid credentials")
+    
+    session['user_id'] = user.id
+    session['user_name'] = user.name
 
     return redirect(url_for('auth.home'))
 
+from flask import session, redirect, url_for, render_template
+
 @auth_bp.route("/home")
 def home():
-    return render_template("home.html")
+
+    user_id = session.get('user_id')
+    if not user_id:
+        return redirect(url_for('auth.login_page'))
+
+    user = User.query.get(user_id)
+    if not user:
+        return redirect(url_for('auth.login_page'))
+
+    return render_template("home.html", user=user)
 
 @auth_bp.route('/logout')
 def logout():

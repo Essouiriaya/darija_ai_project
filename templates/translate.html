@@ -66,18 +66,55 @@
         <button id="translateTextBtn" class="btn btn-gradient px-5">Translate</button>
       </div>
     </div>
+
     <!-- AUDIO -->
     <div class="tab-pane fade" id="audio">
       <div class="glass p-4">
-        <div id="audioDrop" class="dropzone">
-          <div class="icon"><i class="fa-solid fa-microphone"></i></div>
-          <h5 class="mb-1">Drop a voice note here</h5>
-          <p class="mb-0" style="color:var(--muted)">or click to browse · MP3, WAV, M4A</p>
+
+        <!-- DROP + RECORD AREA -->
+        <div id="audioDrop" class="dropzone text-center">
+
+          <div class="icon mb-2">
+            <i class="fa-solid fa-microphone fa-2x"></i>
+          </div>
+
+          <h5 class="mb-1">Voice Input</h5>
+
+          <p class="mb-3" style="color:var(--muted)">
+            Record live or upload audio file (MP3, WAV, M4A)
+          </p>
+
+          <!-- UPLOAD FILE -->
           <input id="audioInput" type="file" accept="audio/*" hidden>
+
+          <!-- BUTTONS -->
+          <div class="d-flex justify-content-center gap-2">
+
+            <button id="recordBtn" class="btn btn-danger btn-sm">
+              🎙 Start Recording
+            </button>
+
+            <button id="stopBtn" class="btn btn-secondary btn-sm" disabled>
+              ⏹ Stop
+            </button>
+
+            <button id="uploadBtn" class="btn btn-outline-primary btn-sm">
+              📁 Upload
+            </button>
+
+          </div>
+
         </div>
+
+        <!-- STATUS -->
+        <div id="audioStatus" class="text-center mt-3 text-muted"></div>
+
+        <!-- RESULT -->
         <div id="audioResult" class="mt-4"></div>
+
       </div>
     </div>
+
     <!-- IMAGE -->
     <div class="tab-pane fade" id="image">
       <div class="glass p-4">
@@ -94,50 +131,6 @@
 </main>
 <footer class="footer container">Darija AI © 2026 · Built for Morocco 🇲🇦</footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-document.getElementById("translateTextBtn").addEventListener("click", async () => {
-
-    const text = document.getElementById("srcText").value;
-    const targetLang = document.getElementById("tgtLang").value;
-    const resultBox = document.getElementById("resultText");
-
-    if (!text.trim()) {
-        resultBox.innerHTML = "⚠️ Please enter text first";
-        return;
-    }
-
-    resultBox.innerHTML = "⏳ Translating...";
-
-    try {
-        const response = await fetch("/api/translate-text", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                user_id: 3,
-                texte_source: text,
-                langue_cible: targetLang
-            })
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            resultBox.innerHTML = `
-                <div style="animation: fadeIn 0.4s ease;">
-                    ${data.output}
-                </div>
-            `;
-        } else {
-            resultBox.innerHTML = "❌ " + (data.error || "Error occurred");
-        }
-
-    } catch (error) {
-        console.error(error);
-        resultBox.innerHTML = "🚨 Server not responding";
-    }
-});
-</script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

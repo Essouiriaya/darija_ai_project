@@ -27,6 +27,9 @@
   </div>
 </nav>
 <header class="hero container">
+  <div class="badge-pill">
+    👋 Welcome back, <span class="grad">{{ user.name }}</span>
+  </div>
   <span class="badge-pill"> <i class="fa-solid fa-bolt"></i> AI-powered · Darija → French / English</span>
   <h1>Translate Darija like a <span class="grad">native</span>.</h1>
   <div class="d-flex justify-content-center gap-2 flex-wrap">
@@ -41,7 +44,7 @@
         <div class="feature-icon"><i class="fa-solid fa-pen-to-square"></i></div>
         <h3>Text Translation</h3>
         <p>Type or paste Darija text and get instant, accurate translations into French or English.</p>
-        <a href="translate.html#text" class="btn btn-gradient">Translate text</a>
+        <a href="{{ url_for('translation.translate_page') }}" class="btn btn-gradient">Translate text</a>
       </div>
     </div>
     <div class="col-md-4">
@@ -49,7 +52,7 @@
         <div class="feature-icon"><i class="fa-solid fa-microphone"></i></i></div>
         <h3>Voice Translation</h3>
         <p>Upload a voice note and our AI transcribes and translates Darija speech in real time.</p>
-        <a href="translate.html#audio" class="btn btn-gradient">Translate voice</a>
+        <a href="{{ url_for('translation.translate_page') }}" class="btn btn-gradient">Translate voice</a>
       </div>
     </div>
     <div class="col-md-4">
@@ -57,7 +60,7 @@
         <div class="feature-icon"><i class="fa-solid fa-image"></i></div>
         <h3>Image Translation</h3>
         <p>Drop a photo of Darija text — menus, signs, notes — and we'll translate every word.</p>
-        <a href="translate.html#image" class="btn btn-gradient">Translate image</a>
+        <a href="{{ url_for('translation.translate_page') }}" class="btn btn-gradient">Translate image</a>
       </div>
     </div>
   </div>
