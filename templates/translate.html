@@ -12,13 +12,15 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-ai sticky-top">
   <div class="container">
-    <a class="navbar-brand brand" href="/"><span class="brand-dot"></span>Darija AI</a>
+    <a class="navbar-brand brand d-flex align-items-center gap-2" href="/">
+      <img src="{{ url_for('static', filename='images/darija_ai.png') }}" height="40">
+    </a>
     <button class="navbar-toggler border-0" data-bs-toggle="collapse" data-bs-target="#nav">
       <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
     </button>
     <div class="collapse navbar-collapse" id="nav">
       <ul class="navbar-nav ms-auto align-items-lg-center">
-        <li class="nav-item"><a class="nav-link btn btn-ghost" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link btn btn-ghost" href="/api/translate">Home</a></li>
         <li class="nav-item"><a class="nav-link btn btn-ghost" href="{{ url_for('translation.translate_page') }}">Translate</a></li>
         <li class="nav-item"><a class="nav-link btn btn-ghost" href="{{ url_for('translation.history_page') }}">History</a></li>
         <li class="nav-item"><a class="btn btn-ghost" href="{{ url_for('auth.logout') }}">Logout</a></li>
@@ -32,14 +34,8 @@
       <h1 class="mb-1" style="font-weight:700">Translation Studio</h1>
       <p style="color:var(--muted)" class="mb-0">Pick a mode below — text, voice, or image.</p>
     </div>
-    <div class="d-flex align-items-center gap-2 glass px-3 py-2" style="border-radius:14px">
-      <select id="srcLang" class="form-select form-select-sm" style="min-width:120px">
-        <option value="darija" selected>Darija</option>
-      </select>
-      <button id="swapLang" class="swap-btn" title="Swap">⇄</button>
-      <select id="tgtLang" class="form-select form-select-sm" style="min-width:120px">
-        <option value="en">English</option>
-      </select>
+    <div class="glass px-3 py-2" style="border-radius:14px">
+      <span>Darija → English Translation</span>
     </div>
   </div>
   <ul class="nav nav-pills mb-4" role="tablist">
